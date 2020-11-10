@@ -1,0 +1,18 @@
+{
+  "name": "js-performance-bench",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/benchmark": "^2.1.0",
+    "benchmark": "^2.1.4",
+    "typescript": "^4.0.5"
+  }
+}
