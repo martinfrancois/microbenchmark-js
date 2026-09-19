@@ -1,18 +1,26 @@
 {
   "name": "js-performance-bench",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node dist/index.js"
+  "description": "A small TypeScript benchmark template using Tinybench.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
   },
-  "keywords": [],
-  "author": "",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "bench": "npm run build && node dist/index.js",
+    "bench:smoke": "npm run bench -- --smoke",
+    "start": "npm run bench",
+    "check": "npm run typecheck && npm test && npm run bench:smoke"
+  },
+  "author": "François Martin",
   "license": "ISC",
-  "dependencies": {
-    "@types/benchmark": "^2.1.0",
-    "benchmark": "^2.1.4",
-    "typescript": "^4.0.5"
+  "devDependencies": {
+    "@types/node": "24.13.4",
+    "tinybench": "6.2.0",
+    "typescript": "7.0.2"
   }
 }

@@ -1,0 +1,129 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests",
+    ":rebaseStalePrs"
+  ],
+  "reviewers": [
+    "martinfrancois"
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "automergeType": "pr",
+  "ignoreTests": false,
+  "internalChecksFilter": "strict",
+  "minimumReleaseAge": "7 days",
+  "minimumReleaseAgeBehaviour": "timestamp-required",
+  "statusCheckWhen": {
+    "minimumReleaseAge": "never"
+  },
+  "pinDigests": true,
+  "platformAutomerge": false,
+  "rangeStrategy": "pin",
+  "dependencyDashboardApproval": false,
+  "prConcurrentLimit": 0,
+  "branchConcurrentLimit": 0,
+  "separateMajorMinor": true,
+  "separateMultipleMajor": false,
+  "separateMinorPatch": false,
+  "schedule": [
+    "* 0-4 * * 5"
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": [
+      "security"
+    ],
+    "minimumReleaseAge": null,
+    "schedule": [],
+    "updateNotScheduled": true,
+    "groupName": null,
+    "groupSlug": null
+  },
+  "packageRules": [
+    {
+      "description": "Review updates until the test check is enforced and Renovate enrollment is verified.",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "pinDigest",
+        "digest"
+      ],
+      "automerge": false
+    },
+    {
+      "matchPackageNames": [
+        "node",
+        "@types/node",
+        "typescript"
+      ],
+      "groupName": "Node and TypeScript toolchain",
+      "groupSlug": "node-typescript-toolchain"
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "matchDepTypes": [
+        "engines"
+      ],
+      "rangeStrategy": "replace"
+    },
+    {
+      "matchManagers": [
+        "nvm"
+      ],
+      "automerge": false,
+      "addLabels": [
+        "needs manual sync"
+      ]
+    },
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false,
+      "addLabels": [
+        "major update"
+      ]
+    },
+    {
+      "description": "Private repository: combine eligible automatic updates after package-specific rules to conserve Actions minutes. Keep existing review requirements unchanged.",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "pinDigest",
+        "digest"
+      ],
+      "matchJsonata": [
+        "automerge = true"
+      ],
+      "groupName": "Routine dependency updates",
+      "groupSlug": "routine-dependencies"
+    },
+    {
+      "description": "Private repository: bundle review-required updates without enabling automerge. Keep majors separate from reviewed non-major updates so incompatible major upgrades do not block other reviewed fixes.",
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch",
+        "pin",
+        "pinDigest",
+        "digest"
+      ],
+      "matchJsonata": [
+        "$not(automerge = true)"
+      ],
+      "groupName": "Reviewed dependency updates",
+      "groupSlug": "reviewed-dependencies",
+      "automerge": false
+    }
+  ],
+  "updateNotScheduled": false,
+  "timezone": "Europe/Zurich",
+  "automerge": false
+}
