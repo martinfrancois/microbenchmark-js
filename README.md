@@ -165,7 +165,7 @@ Security updates bypass the ordinary release-age restriction.
 
 ## License
 
-The regex versus `indexOf` comparison comes from the
+This project uses the [ISC license](LICENSE).
+
+The idea of comparing regex with `indexOf` was inspired by the
 [Benchmark.js README example](https://github.com/bestiejs/benchmark.js#readme).
-Its MIT notice is retained in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-The remaining project code uses [ISC](LICENSE).
