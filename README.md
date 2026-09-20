@@ -1,6 +1,6 @@
-# JavaScript benchmark template
+# microbenchmark-js
 
-A small TypeScript starting point for comparing JavaScript code with
+A small TypeScript template for writing JavaScript microbenchmarks with
 [Tinybench](https://github.com/tinylibs/tinybench). Edit `src/index.ts` to write
 your own benchmark. The example compares `/o/.test(text)` with
 `text.indexOf("o") !== -1`, using the same inputs for both.
@@ -8,7 +8,7 @@ your own benchmark. The example compares `/o/.test(text)` with
 ## Run
 
 Use Node 24, with the exact development version recorded in `.nvmrc`.
-Create a repository with [Use this template](https://github.com/martinfrancois/js-performance-bench/generate),
+Create a repository with [Use this template](https://github.com/martinfrancois/microbenchmark-js/generate),
 or clone this repository.
 
 ```sh
