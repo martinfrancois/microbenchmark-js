@@ -22,6 +22,26 @@ npm run bench
 GitHub Actions uses that command to catch type errors, failed assertions and
 benchmark exceptions. CI does not gate changes on speed rankings.
 
+### Example output
+
+One run with Node 24.20.0 and Tinybench 6.2.0 printed:
+
+```text
+┌─────────┬──────────────────┬──────────────────┬──────────────────┬────────────────────────┬────────────────────────┬─────────┐
+│ (index) │ Task name        │ Latency avg (ns) │ Latency med (ns) │ Throughput avg (ops/s) │ Throughput med (ops/s) │ Samples │
+├─────────┼──────────────────┼──────────────────┼──────────────────┼────────────────────────┼────────────────────────┼─────────┤
+│ 0       │ 'RegExp.test'    │ '69.33 ± 0.07%'  │ '67.00 ± 2.00'   │ '14722917 ± 0.01%'     │ '14925373 ± 459242'    │ 3605867 │
+│ 1       │ 'String.indexOf' │ '39.72 ± 0.05%'  │ '38.00 ± 1.00'   │ '26000586 ± 0.01%'     │ '26315790 ± 711237'    │ 6293473 │
+└─────────┴──────────────────┴──────────────────┴──────────────────┴────────────────────────┴────────────────────────┴─────────┘
+```
+
+In this run, `String.indexOf` had lower average latency and higher average
+throughput. Each operation is a batch of all five inputs. The `±` percentages
+in the average columns show relative margins of error; `Samples` counts measured
+batches. Results vary with the machine, runtime and inputs. Repeat measurements
+before drawing a performance conclusion; the template does not print a
+statistical "Fastest is" verdict.
+
 ## Write your benchmark
 
 Keep everything in `src/index.ts`:
