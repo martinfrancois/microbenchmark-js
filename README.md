@@ -4,6 +4,28 @@ Compare small JavaScript functions with TypeScript and [Tinybench](https://githu
 The example sums 1,000 integers with a loop and `Array.reduce`.
 It checks the answers before timing and reports measurements from your machine.
 
+## Why Tinybench instead of Benchmark.js
+
+We chose Tinybench for this template because it is maintained, includes
+TypeScript declarations, supports ESM and async functions, and has no runtime
+dependencies. [Vitest also uses it for benchmarking](https://vitest.dev/guide/features.html#benchmarking).
+[Benchmark.js was archived in April 2024](https://github.com/bestiejs/benchmark.js),
+so Tinybench is a better maintenance fit for a new TypeScript starter.
+
+The measurement approaches have different strengths. Benchmark.js times batches
+of repeated operations, which spreads timer overhead across those operations.
+Tinybench normally times each call, preserving variation between calls for
+latency percentiles and outlier analysis. For extremely short operations, that
+per-call timer overhead distorts measurements unless the benchmark accounts for
+it. Tinybench documents [overhead correction and manual batching](https://github.com/tinylibs/tinybench#timer-overhead-correction).
+Batching produces samples of batch averages, so its percentiles no longer
+describe individual calls.
+
+This choice does not claim that Tinybench is more accurate for every workload.
+Check the measurement overhead, warm up the runtime, and repeat meaningful runs
+before drawing conclusions. Passing CI verifies correctness and execution;
+it does not validate a performance ranking.
+
 ## Start a benchmark
 
 Create your own repository with GitHub's **Use this template** button once the
