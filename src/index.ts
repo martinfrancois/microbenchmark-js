@@ -1,25 +1,45 @@
-import Benchmark from "benchmark";
+import assert from "node:assert/strict";
+import { Bench } from "tinybench";
 
-const suite = new Benchmark.Suite;
+// Prepare inputs outside the timed callbacks, including matches and misses.
+const fixtures = [
+  { text: "Hello World!", expected: true },
+  { text: "o" + "x".repeat(1_000), expected: true },
+  { text: "x".repeat(1_000) + "o", expected: true },
+  { text: "x".repeat(1_000), expected: false },
+  { text: "", expected: false },
+];
+const pattern = /o/;
 
-// add tests
-suite.add('RegExp#test', function() {
-  /o/.test('Hello World!');
-})
-.add('String#indexOf', function() {
-  'Hello World!'.indexOf('o') > -1;
-})
-// add listeners
-.on('cycle', function(event) {
-  console.log(String(event.target));
-})
-.on('complete', function() {
-  console.log('Fastest is ' + this.filter('fastest').map('name'));
-})
-// run async
-.run({ 'async': true });
+for (const { text, expected } of fixtures) {
+  assert.equal(pattern.test(text), expected);
+  assert.equal(text.indexOf("o") !== -1, expected);
+}
 
-// logs:
-// => RegExp#test x 4,161,532 +-0.99% (59 cycles)
-// => String#indexOf x 6,139,623 +-1.00% (131 cycles)
-// => Fastest is String#indexOf
+const inputs = fixtures.map(({ text }) => text);
+const expectedMatches = fixtures.filter(({ expected }) => expected).length;
+let regexMatches = 0;
+let indexOfMatches = 0;
+
+const bench = new Bench({ time: 250, warmupTime: 250, throws: true });
+bench
+  .add("RegExp.test", () => {
+    let matches = 0;
+    for (const text of inputs) {
+      if (pattern.test(text)) matches++;
+    }
+    regexMatches = matches;
+  })
+  .add("String.indexOf", () => {
+    let matches = 0;
+    for (const text of inputs) {
+      if (text.indexOf("o") !== -1) matches++;
+    }
+    indexOfMatches = matches;
+  });
+
+await bench.run();
+// Consume both results after timing; do not put assertions in the callbacks.
+assert.equal(regexMatches, expectedMatches);
+assert.equal(indexOfMatches, expectedMatches);
+console.table(bench.table());
