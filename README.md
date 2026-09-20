@@ -8,7 +8,8 @@ your own benchmark. The example compares `/o/.test(text)` with
 ## Run
 
 Use Node 24, with the exact development version recorded in `.nvmrc`.
-Clone the repository, or use GitHub's **Use this template** button once enabled.
+Create a repository with [Use this template](https://github.com/martinfrancois/js-performance-bench/generate),
+or clone this repository.
 
 ```sh
 nvm use
@@ -67,21 +68,26 @@ Check the measurement overhead, warm up the runtime, and repeat meaningful runs
 before drawing conclusions. Passing CI verifies correctness and execution;
 it does not validate a performance ranking.
 
-## Repository setup
+## Set up your repository
 
-Update the package name, author, README and license details when copying this
-template. `private: true` prevents npm publication; it does not control GitHub
-visibility. This repository stays private while publication review is pending.
+Update the package name, author and README when copying this template. Retain
+applicable copyright and license notices. `private: true` in `package.json`
+prevents accidental npm publication; it does not restrict GitHub visibility.
 
-Renovate follows the owner's private-repository policy: Friday updates in
-Europe/Zurich, a seven-day release age, pinned dependencies and action digests,
-and separate reviewed major updates. Security alerts bypass ordinary age and
-schedule restrictions. Change the reviewer when copying to another account.
+GitHub Actions runs `npm run check` on pull requests and pushes to `main`.
+Require the `test` check in your branch protection settings or ruleset before
+enabling Renovate for your repository. Install or enable Renovate for your
+repository, then replace or remove `martinfrancois` in its `reviewers` setting.
+Repository settings and app access need to be configured on your new repository.
 
-Automerge starts disabled. Verify Renovate enrollment and require the `test`
-CI check before enabling non-major automerge. Keep majors under human review.
-Before publishing, remove the private schedule and broad grouping rules, set
-`separateMultipleMajor` to `true`, and retain coordinated toolchain updates.
+Renovate pins dependencies and action digests, waits seven days for ordinary
+releases, and keeps unrelated updates separate. Node
+and TypeScript tooling is grouped for coordinated updates. Eligible non-major
+updates merge after checks pass; major updates require review. Node runtime
+updates also require review so `.nvmrc` and `engines.node` stay aligned.
+Security updates bypass the ordinary release-age restriction.
+
+## License
 
 The regex versus `indexOf` comparison comes from the
 [Benchmark.js README example](https://github.com/bestiejs/benchmark.js#readme).
