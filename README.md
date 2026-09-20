@@ -82,9 +82,14 @@ they are starting values, not evidence that a measurement is stable.
 3. Check what the optimizer actually measures. Consume results, but do not
    assume that this prevents constant folding or moving repeated work out of a
    loop. Use representative, varied inputs. Extra loops and subtracting an empty
-   loop's time do not guarantee an isolated operation cost. Read
-   [Vyacheslav Egorov's explanation of microbenchmark traps](https://mrale.ph/blog/2012/12/15/microbenchmarks-fairy-tale.html).
-   Its 2012 V8 examples explain the mechanisms, not today's exact engine behavior.
+   loop's time do not guarantee an isolated operation cost. For a short
+   introduction, read [Vitest's guide to dead-code elimination](https://vitest.dev/guide/benchmarking#dead-code-elimination);
+   the principle of consuming results also applies to Tinybench callbacks.
+   For a worked investigation, read Vyacheslav Egorov's 2024 article
+   [Microbenchmarks are experiments](https://mrale.ph/blog/2024/11/27/microbenchmarks-are-experiments.html).
+   It shows how constant inputs and compiler transformations change the work
+   being measured, and how to investigate surprising results by checking
+   equivalent work and inspecting generated code.
 4. Check timer limits before trusting tiny differences. Tinybench's
    [precision FAQ](https://github.com/tinylibs/tinybench/blob/v6.2.0/FAQ.md#how-do-i-deal-with-measurement-precision-issues)
    explains `detectedResolution`, timer providers and the `warning` event.
