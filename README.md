@@ -1,8 +1,49 @@
 # JavaScript benchmark template
 
-Compare small JavaScript functions with TypeScript and [Tinybench](https://github.com/tinylibs/tinybench).
-The example sums 1,000 integers with a loop and `Array.reduce`.
-It checks the answers before timing and reports measurements from your machine.
+A small TypeScript starting point for comparing JavaScript code with
+[Tinybench](https://github.com/tinylibs/tinybench). Edit `src/index.ts` to write
+your own benchmark. The example compares `/o/.test(text)` with
+`text.indexOf("o") !== -1`, using the same inputs for both.
+
+## Run
+
+Use Node 24, with the exact development version recorded in `.nvmrc`.
+Clone the repository, or use GitHub's **Use this template** button once enabled.
+
+```sh
+nvm use
+npm ci
+npm run bench
+```
+
+`nvm` is optional if the matching Node version is already installed.
+`npm start` runs the same benchmark. `npm run check` compiles and runs it too;
+GitHub Actions uses that command to catch type errors, failed assertions and
+benchmark exceptions. CI does not gate changes on speed rankings.
+
+## Write your benchmark
+
+Keep everything in `src/index.ts`:
+
+1. Replace the fixtures and expected results with representative inputs.
+2. Update the correctness assertions and the two `.add` callbacks together.
+3. Keep input preparation and assertions outside the timed callbacks.
+4. Consume each implementation's result after the run, as the match counts do.
+5. Adjust the warmup and measurement durations in `new Bench` when needed.
+
+The example reuses one regex without `g` or `y` flags, so searches have no
+`lastIndex` state. Regex construction is excluded from the timing. Fixtures
+include early and late matches, a missing character, and an empty string.
+
+Each timed callback searches the entire input array. The reported time and
+throughput describe **one batch**, including the loop and match counting.
+They are not measurements of one string search. Batching reduces timer overhead
+per search, but loop overhead and JavaScript engine optimizations still matter.
+Batch percentiles describe variation between batches, not individual searches.
+
+Repeat runs with inputs that reflect your workload. Record your Node version
+and hardware when sharing results. Compare uncertainty as well as averages;
+this example does not establish a universal winner.
 
 ## Why Tinybench instead of Benchmark.js
 
@@ -26,64 +67,23 @@ Check the measurement overhead, warm up the runtime, and repeat meaningful runs
 before drawing conclusions. Passing CI verifies correctness and execution;
 it does not validate a performance ranking.
 
-## Start a benchmark
+## Repository setup
 
-Create your own repository with GitHub's **Use this template** button once the
-owner enables the template setting, or clone this repository. Use Node 24,
-with the exact development version recorded in `.nvmrc`.
-
-```sh
-nvm use
-npm ci
-npm run bench
-```
-
-`nvm` is optional if the matching Node version is already installed.
-`npm start` runs the same benchmark.
-
-To compare your own code:
-
-1. Replace the functions and case names in `src/cases.ts`.
-2. Change the input and expected answer in `src/index.ts`.
-3. Update `test/cases.test.mjs` to cover representative inputs and edge cases.
-4. Run `npm run check`, then `npm run bench`.
-
-Keep setup and correctness assertions outside the timed callback. Each callback
-stores its result for a check after the run; that storage adds the same overhead
-to both examples. For very small operations, measure that overhead or increase
-the work per callback. Repeat runs with inputs that reflect your application.
-The sample does not establish which approach is best for another workload.
-
-## Check changes
-
-```sh
-npm run check
-```
-
-This type-checks the source, compiles it, tests the example's answers, and runs a
-short benchmark. `npm run bench:smoke` runs only the short execution check.
-Smoke timings are not performance evidence. Benchmark exceptions fail the command.
-GitHub Actions runs the same checks on pull requests and pushes to `main`.
-The required job name is `test`; CI does not compare performance rankings.
-
-## Make the template your own
-
-Update the package name, author, README, and license details for your project.
-`private: true` prevents npm publication; it does not control GitHub visibility.
-This repository remains private while publication review is pending.
+Update the package name, author, README and license details when copying this
+template. `private: true` prevents npm publication; it does not control GitHub
+visibility. This repository stays private while publication review is pending.
 
 Renovate follows the owner's private-repository policy: Friday updates in
 Europe/Zurich, a seven-day release age, pinned dependencies and action digests,
-and separate reviewed major updates. Security alerts bypass the ordinary age
-and schedule restrictions. Replace the reviewer in `renovate.json` when copying
-this template to another account.
+and separate reviewed major updates. Security alerts bypass ordinary age and
+schedule restrictions. Change the reviewer when copying to another account.
 
-Automatic merging starts disabled. After confirming Renovate enrollment and a
-successful Actions run, require the `test` check in a branch rule before enabling
-non-major automerge. Keep major updates under human review. Before publishing,
-remove the private schedule and broad grouping rules, set
-`separateMultipleMajor` to `true`, and keep coordinated toolchain updates together.
+Automerge starts disabled. Verify Renovate enrollment and require the `test`
+CI check before enabling non-major automerge. Keep majors under human review.
+Before publishing, remove the private schedule and broad grouping rules, set
+`separateMultipleMajor` to `true`, and retain coordinated toolchain updates.
 
-The previous version used the Benchmark.js README's string-search example.
-This version replaces that example and runner with an array-sum comparison.
-Project code uses the [ISC license](LICENSE); dependencies retain their own licenses.
+The regex versus `indexOf` comparison comes from the
+[Benchmark.js README example](https://github.com/bestiejs/benchmark.js#readme).
+Its MIT notice is retained in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The remaining project code uses [ISC](LICENSE).

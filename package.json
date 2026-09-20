@@ -9,12 +9,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "typecheck": "tsc --noEmit",
-    "test": "npm run build && node --test test/*.test.mjs",
     "bench": "npm run build && node dist/index.js",
-    "bench:smoke": "npm run bench -- --smoke",
     "start": "npm run bench",
-    "check": "npm run typecheck && npm test && npm run bench:smoke"
+    "check": "npm run bench"
   },
   "author": "François Martin",
   "license": "ISC",
