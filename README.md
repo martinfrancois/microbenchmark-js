@@ -140,7 +140,7 @@ of repeated operations, which spreads timer overhead across those operations.
 Tinybench normally times each call, preserving variation between calls for
 latency percentiles and outlier analysis. For extremely short operations, that
 per-call timer overhead distorts measurements unless the benchmark accounts for
-it. Tinybench documents [overhead correction and manual batching](https://github.com/tinylibs/tinybench#timer-overhead-correction).
+it. Tinybench documents [overhead correction and manual batching](https://github.com/tinylibs/tinybench/blob/v6.2.0/README.md#timer-overhead-correction).
 Batching produces samples of batch averages, so its percentiles no longer
 describe individual calls.
 

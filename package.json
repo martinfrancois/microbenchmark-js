@@ -1,7 +1,7 @@
 {
   "name": "microbenchmark-js",
   "version": "1.0.0",
-  "description": "A simple Tinybench template for writing JavaScript microbenchmarks.",
+  "description": "A small TypeScript template for writing JavaScript microbenchmarks with Tinybench.",
   "private": true,
   "type": "module",
   "engines": {
