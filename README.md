@@ -18,8 +18,8 @@ npm run bench
 ```
 
 `nvm` is optional if the matching Node version is already installed.
-`npm start` runs the same benchmark. `npm run check` compiles and runs it too;
-GitHub Actions uses that command to catch type errors, failed assertions and
+`npm run bench` compiles and runs the benchmark. GitHub Actions uses the same
+command to catch type errors, failed assertions and
 benchmark exceptions. CI does not gate changes on speed rankings.
 
 ### Example output
@@ -150,7 +150,7 @@ Update the package name, author and README when copying this template. Retain
 applicable copyright and license notices. `private: true` in `package.json`
 prevents accidental npm publication; it does not restrict GitHub visibility.
 
-GitHub Actions runs `npm run check` on pull requests and pushes to `main`.
+GitHub Actions runs `npm run bench` on pull requests and pushes to `main`.
 Require the `test` check in your branch protection settings or ruleset before
 enabling Renovate for your repository. Install or enable Renovate for your
 repository, then replace or remove `martinfrancois` in its `reviewers` setting.

@@ -8,10 +8,7 @@
     "node": ">=24 <25"
   },
   "scripts": {
-    "build": "tsc",
-    "bench": "npm run build && node dist/index.js",
-    "start": "npm run bench",
-    "check": "npm run bench"
+    "bench": "tsc && node dist/index.js"
   },
   "author": "François Martin",
   "license": "ISC",
