@@ -24,9 +24,8 @@ selects the exact pnpm version for this repository.
 command to catch type errors, failed assertions and
 benchmark exceptions. CI does not gate changes on speed rankings.
 
-npm works too, with `npm install` and `npm run bench`. The committed lockfile is
-pnpm's, so npm resolves transitive versions itself. Here that is only
-`undici-types`, because the three direct dependencies are pinned exactly.
+npm works too: `npm install` and `npm run bench`. npm ignores `pnpm-lock.yaml`
+and resolves versions itself, so use pnpm if you want the exact tree CI runs.
 
 ### Example output
 
