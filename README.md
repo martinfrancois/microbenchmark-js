@@ -13,12 +13,14 @@ or clone this repository.
 
 ```sh
 nvm use
-npm ci
-npm run bench
+pnpm install --frozen-lockfile
+pnpm run bench
 ```
 
 `nvm` is optional if the matching Node version is already installed.
-`npm run bench` compiles and runs the benchmark. GitHub Actions uses the same
+Install pnpm if it is missing; the `packageManager` field in `package.json`
+selects the exact pnpm version for this repository.
+`pnpm run bench` compiles and runs the benchmark. GitHub Actions uses the same
 command to catch type errors, failed assertions and
 benchmark exceptions. CI does not gate changes on speed rankings.
 
@@ -122,7 +124,7 @@ For implementation details, start with [Tinybench's usage guide](https://github.
 and [BenchOptions reference](https://tinylibs.github.io/tinybench/interfaces/BenchOptions.html)
 for timing, warmup and concurrency controls. The README and FAQ links target
 Tinybench 6.2.0; the API site follows the latest release. Check the installed
-version in `package-lock.json` and its TypeScript declarations before using a new
+version in `pnpm-lock.yaml` and its TypeScript declarations before using a new
 option. For more on repeated measurements and uncertainty, read the
 [Node.js benchmark guide](https://github.com/nodejs/node/blob/main/doc/contributing/writing-and-running-benchmarks.md).
 Its commands belong to Node core's benchmark suite, not this template.
@@ -155,7 +157,7 @@ Update the package name, author and README when copying this template. Retain
 applicable copyright and license notices. `private: true` in `package.json`
 prevents accidental npm publication; it does not restrict GitHub visibility.
 
-GitHub Actions runs `npm run bench` on pull requests and pushes to `main`.
+GitHub Actions runs `pnpm run bench` on pull requests and pushes to `main`.
 Require the `test` check in your branch protection settings or ruleset before
 enabling Renovate for your repository. Install or enable Renovate for your
 repository, then replace or remove `martinfrancois` in its `reviewers` setting.
