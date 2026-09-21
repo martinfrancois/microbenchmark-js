@@ -19,12 +19,14 @@ pnpm run bench
 
 `nvm` is optional if the matching Node version is already installed.
 Install pnpm if it is missing; the `packageManager` field in `package.json`
-selects the exact pnpm version for this repository. npm still works, with
-`npm install` and `npm run bench`, but the committed lockfile is pnpm's, so
-npm resolves its own versions rather than the ones CI pins.
+selects the exact pnpm version for this repository.
 `pnpm run bench` compiles and runs the benchmark. GitHub Actions uses the same
 command to catch type errors, failed assertions and
 benchmark exceptions. CI does not gate changes on speed rankings.
+
+npm works too, with `npm install` and `npm run bench`. The committed lockfile is
+pnpm's, so npm resolves transitive versions itself. Here that is only
+`undici-types`, because the three direct dependencies are pinned exactly.
 
 ### Example output
 
