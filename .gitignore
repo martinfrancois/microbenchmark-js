@@ -436,3 +436,8 @@ fabric.properties
 .idea
 *.iml
 
+
+### This repository
+# The README documents an npm path, and npm writes a lockfile this repository does
+# not use. pnpm-lock.yaml is the committed one.
+package-lock.json
