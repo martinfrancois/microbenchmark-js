@@ -12,8 +12,8 @@ importers:
         specifier: 24.19.1
         version: 24.19.1
       tinybench:
-        specifier: 6.2.0
-        version: 6.2.0
+        specifier: 6.2.1
+        version: 6.2.1
       typescript:
         specifier: 7.0.2
         version: 7.0.2
@@ -143,8 +143,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  tinybench@6.2.0:
-    resolution: {integrity: sha512-78U2TlB2CnVenajOFzf3BKSm0J6oz5L0NV7g32LCPccvYc0lbWvys4d3uUUCS2B1N8PAf2+aekR8i1KbC3HO7Q==}
+  tinybench@6.2.1:
+    resolution: {integrity: sha512-IAbQaPJIIdhVxi0mqy9lez1wEwje0UQf9F1vwtbelEG5Nbgn0nPOxCvU+mNeNS9gyJTAhrHp74CbUaSynQpZcQ==}
     engines: {node: '>=20.0.0'}
 
   typescript@7.0.2:
@@ -221,7 +221,7 @@ snapshots:
   '@typescript/typescript-win32-x64@7.0.2':
     optional: true
 
-  tinybench@6.2.0: {}
+  tinybench@6.2.1: {}
 
   typescript@7.0.2:
     optionalDependencies:
