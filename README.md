@@ -18,9 +18,11 @@ pnpm run bench
 ```
 
 `nvm` is optional if the matching Node version is already installed.
-Run `corepack enable pnpm` if pnpm is missing. Corepack then runs the exact
-pnpm version that the `packageManager` field in `package.json` pins. A pnpm
-installed some other way runs as whatever version it is.
+Node 25 and later no longer bundle Corepack. If pnpm is missing, run
+`npm install -g corepack` after `nvm use`, then `corepack enable pnpm`.
+Corepack then runs the exact pnpm version that the `packageManager` field in
+`package.json` pins. A pnpm installed some other way runs as whatever version
+it is.
 `pnpm run bench` compiles and runs the benchmark. GitHub Actions uses the same
 command to catch type errors, failed assertions and
 benchmark exceptions. CI does not gate changes on speed rankings.
