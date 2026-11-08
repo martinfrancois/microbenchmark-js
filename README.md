@@ -7,7 +7,7 @@ your own benchmark. The example compares `/o/.test(text)` with
 
 ## Run
 
-Use Node 24, with the exact development version recorded in `.nvmrc`.
+Use Node 26, with the exact development version recorded in `.nvmrc`.
 Create a repository with [Use this template](https://github.com/martinfrancois/microbenchmark-js/generate),
 or clone this repository.
 
