@@ -166,8 +166,8 @@ prevents accidental npm publication; it does not restrict GitHub visibility.
 GitHub Actions runs `pnpm run bench` on pull requests and pushes to `main`.
 Require the `test` check in your branch protection settings or ruleset before
 enabling Renovate for your repository. Install or enable Renovate for your
-repository, then replace or remove `martinfrancois` in its `reviewers` setting.
-Repository settings and app access need to be configured on your new repository.
+repository. Repository settings and app access need to be configured on your
+new repository.
 
 Renovate pins dependencies and action digests, waits seven days for ordinary
 releases, and keeps unrelated updates separate. Node and TypeScript tooling is
